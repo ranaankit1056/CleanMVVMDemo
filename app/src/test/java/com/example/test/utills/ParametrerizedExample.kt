@@ -1,7 +1,9 @@
 package com.example.test.utills
 
+import org.junit.After
 import org.junit.Test
 import org.junit.Assert.*
+import org.junit.Before
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 import org.junit.runners.Parameterized.Parameters
@@ -9,7 +11,6 @@ import org.junit.runners.Parameterized.Parameters
 
 @RunWith(value = Parameterized::class)
 class ParametrizedExample(val input:String,val expectedResult:Boolean) {
-
     companion object   {
         @JvmStatic
         @Parameters
@@ -21,7 +22,6 @@ class ParametrizedExample(val input:String,val expectedResult:Boolean) {
             )
         }
     }
-
     @Test
     fun test() {
             val helper =Helper()
@@ -29,5 +29,12 @@ class ParametrizedExample(val input:String,val expectedResult:Boolean) {
             assertEquals(expectedResult,result)
 
         }
-
+    @After
+    fun after(){
+        println( "After")
+    }
+    @Before
+    fun before(){
+        println("Before")
+    }
 }

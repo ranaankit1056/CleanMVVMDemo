@@ -11,12 +11,12 @@ import org.junit.Test
 
      @After
      fun after(){
-         Log.e("##", "After")
+         println( "After")
      }
 
      @Before
      fun before(){
-         Log.e("##", "Before")
+         println("Before")
      }
 @Test
  fun isPalindrome_input_string_level_expected_true() {
