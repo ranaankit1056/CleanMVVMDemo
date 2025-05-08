@@ -2,9 +2,8 @@ package com.example.test.utills
 
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.annotation.StringRes
-import com.google.gson.Gson
 import androidx.core.content.edit
+import com.google.gson.Gson
 
 
 object PreferenceManager {
@@ -14,10 +13,6 @@ object PreferenceManager {
     fun init(context: Context) {
         sharedPreferences = context.getSharedPreferences("my_app", Context.MODE_PRIVATE)
         editor = sharedPreferences.edit()
-    }
-
-    fun getBooleanPref(@StringRes key: Int, defValue: Boolean, context: Context): Boolean {
-        return sharedPreferences.getBoolean(context.getString(key), defValue)
     }
 
     fun getSharedPreferences(): SharedPreferences = sharedPreferences
@@ -54,7 +49,5 @@ object PreferenceManager {
             null
         }
     }
-
-
 
 }
