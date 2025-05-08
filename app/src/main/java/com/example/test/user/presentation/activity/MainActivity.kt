@@ -3,6 +3,7 @@ package com.example.test.user.presentation.activity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -11,12 +12,12 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.test.R
+import com.example.test.common.ApiResultState
+import com.example.test.databinding.ActivityMainBinding
 import com.example.test.user.domain.model.UserDomain
 import com.example.test.user.domain.model.UserDomainData
 import com.example.test.user.presentation.adapter.UserAdapter
 import com.example.test.user.presentation.viewModels.UserViewModel
-import com.example.test.common.ApiResultState
-import com.example.test.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,11 +26,17 @@ class MainActivity : AppCompatActivity() {
     private lateinit var userAdapter:UserAdapter
     private lateinit var binding:ActivityMainBinding
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        showData("Dada")
+        SingletonClass.showData()
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -85,6 +92,25 @@ class MainActivity : AppCompatActivity() {
 
     private fun error(message:String){
         Toast.makeText(this@MainActivity,message,Toast.LENGTH_LONG).show()
+
+
+        val fn=::isPalindrome
+
+        Log.e("##","fd" + check(isPalindrome("dsds")));
+
+    }
+
+    fun isPalindrome(input:String) :Boolean{
+        val str = input.lowercase().replace(" ","")
+        if (str == str.reversed()){
+            return true
+        }else{
+            return false
+        }
+    }
+
+    fun check(abc:(input:String)->Boolean){
+        Log.e("sdsd","Fdfd")
 
     }
 }
