@@ -65,6 +65,37 @@ class MainActivity : AppCompatActivity() {
         //---as Safe Type Casting
         safeCastExample("Hello")  // Output: 5
         safeCastExample(123)      // Output: Not a String
+
+        //--- Higher-Order Function
+        //---Takes another function as a parameter, or Returns a function as a result.
+        val sumResult = operateOnNumbers(5, 3) { x, y -> x + y }
+        Log.e("##","" + sumResult)
+        //--Output: 8
+        val multiplyResult = operateOnNumbers(5, 3) { x, y -> x * y }
+        Log.e("##","" + multiplyResult)
+        //-- Output : 15
+
+        //---Higher-Order Functions with Collections
+        val numbers = listOf(1, 2, 3, 4, 5)
+
+        val filterNumbers = numbers.filter { it %2 ==0 }
+        Log.e("##","" + filterNumbers)
+        //--- Output: [2,4]
+
+        val squaredNumbers = numbers.map { it * it }
+        Log.e("##","" + squaredNumbers)
+        //--- Output: [1, 4, 9, 16, 25]
+
+        val sum = numbers.reduce { acc, num -> acc + num }
+        Log.e("##","" + sum)
+        // Output: 15
+
+
+
+    }
+
+    fun operateOnNumbers(a: Int, b: Int, operation: (Int, Int) -> Int): Int {
+        return operation(a, b)
     }
 
     private fun safeCastExample(value: Any) {
@@ -93,9 +124,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun error(message:String){
-        Toast.makeText(this@MainActivity,message,Toast.LENGTH_LONG).show()
+
+       Toast.makeText(this@MainActivity,message,Toast.LENGTH_LONG).show()
         val fn=::isPalindrome
-        Log.e("##","fd" + check(isPalindrome("dsds")));
+        Log.e("##","fd" + fn);
 
     }
 
