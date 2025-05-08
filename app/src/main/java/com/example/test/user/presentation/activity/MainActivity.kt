@@ -46,13 +46,24 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+
+        //-- Extension function for String
+        //allow you to add new functionality to existing classes without modifying their original implementation.
+        val message = "hello, kotlin!"
+        println(message.capitalizeFirstLetter())
+        // Output: "Hello, kotlin!"
+
         //--- TOP LEVEL Function
+        // use function without create instances of the class  in same module
         showData("Dada")
         //-- Singleton Class
+        // has only one instance throughout the app and no need for manual instance creation
         SingletonClass.showData()
         //-- Enum Demo
+        //fix value
         Status.SUCCESS.printMessage()
         //----Sealed Class Demo
+        //Type Fix but value can change for controlled hierarchy
         userViewModel.userList.observe(this){state->
             when(state){
                 //-------is Operator – Type Checking
@@ -91,7 +102,16 @@ class MainActivity : AppCompatActivity() {
         // Output: 15
 
 
+        // Palette API
+        // is used to extract prominent colors from images to create dynamic and
+        // visually engaging UI designs. It helps developers generate color schemes
+        // from images and apply them to UI elements like backgrounds, text, and buttons.
 
+
+    }
+
+    fun String.capitalizeFirstLetter(): String {
+        return this.replaceFirstChar { it.uppercase() }
     }
 
     fun operateOnNumbers(a: Int, b: Int, operation: (Int, Int) -> Int): Int {
