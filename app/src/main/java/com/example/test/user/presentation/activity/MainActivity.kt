@@ -101,9 +101,9 @@ class MainActivity : AppCompatActivity() {
         val sumResult = operateOnNumbers(5, 3) { x, y -> x + y }
         Log.e("##","" + sumResult)
         //--Output: 8
-        val multiplyResult = operateOnNumbers(5, 3) { x, y -> x * y }
+        val multiplyResult = operateOnNumbers(4 ,2) { x, y -> x * y }
         Log.e("##","" + multiplyResult)
-        //-- Output : 15
+        //-- Output : 8
 
         //---Higher-Order Functions with Collections
         val numbers = listOf(1, 2, 3, 4, 5)
@@ -129,11 +129,11 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun String.capitalizeFirstLetter(): String {
+    private fun String.capitalizeFirstLetter(): String {
         return this.replaceFirstChar { it.uppercase() }
     }
 
-    fun operateOnNumbers(a: Int, b: Int, operation: (Int, Int) -> Int): Int {
+    private fun operateOnNumbers(a: Int, b: Int, operation: (Int, Int) -> Int): Int {
         return operation(a, b)
     }
 
@@ -146,9 +146,9 @@ class MainActivity : AppCompatActivity() {
 
     }
     private fun success(userDomainData: UserDomainData){
-       if (userDomainData.status.equals("200")){
+       if (userDomainData.status == "200"){
 
-            if (userDomainData.userList.size>0){
+            if (userDomainData.userList.isNotEmpty()){
                 PreferenceManager.setObject("user_data",userDomainData)
             }
             userAdapter = UserAdapter(userDomainData.userList)
@@ -170,7 +170,7 @@ class MainActivity : AppCompatActivity() {
 
         val retrievedUser: UserDomainData? = PreferenceManager.getSharedPreferences().getObject("user_data")
         if(retrievedUser!!.userList.isNotEmpty()){
-            userAdapter = UserAdapter(retrievedUser!!.userList)
+            userAdapter = UserAdapter(retrievedUser.userList)
             binding.ListData.layoutManager = LinearLayoutManager(this@MainActivity,LinearLayoutManager.VERTICAL,false)
             binding.ListData.adapter = userAdapter
             userAdapter.SetUpInteface(object:UserAdapter.ItemClick{
@@ -186,26 +186,18 @@ class MainActivity : AppCompatActivity() {
 
        Toast.makeText(this@MainActivity,message,Toast.LENGTH_LONG).show()
         val fn=::isPalindrome
-        Log.e("##","fd" + fn);
+        Log.e("##", "fd$fn")
 
     }
 
     fun isPalindrome(input:String) :Boolean{
         val str = input.lowercase().replace(" ","")
-        if (str == str.reversed()){
-            return true
-        }else{
-            return false
-        }
+        return str == str.reversed()
     }
 
     class Box<T>(private var item: T) {
         fun getItem(): T {
             return item
-        }
-
-        fun setItem(newItem: T) {
-            item = newItem
         }
     }
 
