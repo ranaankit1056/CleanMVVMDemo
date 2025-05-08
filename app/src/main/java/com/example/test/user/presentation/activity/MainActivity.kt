@@ -15,6 +15,8 @@ import com.example.test.user.domain.model.UserDomain
 import com.example.test.user.domain.model.UserDomainData
 import com.example.test.user.presentation.adapter.UserAdapter
 import com.example.test.user.presentation.viewModels.UserViewModel
+import com.example.test.utills.PreferenceManager
+import com.example.test.utills.PreferenceManager.getObject
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,6 +33,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        PreferenceManager.init(this)
+
 
         binding.EtvSearch.addTextChangedListener(object:TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -46,6 +50,12 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+
+        //-- PreferenceManager
+
+        PreferenceManager.setKeyValueString("user_id","202")
+        Log.e("##","" + PreferenceManager.getKeyValueString("user_id"))
+
         //-- 1) Generic Class
         //a generic class allows you to define a class that can work with different data types while maintaining type safety.
         val intBox = Box(10) // Box holding an Int
@@ -137,6 +147,10 @@ class MainActivity : AppCompatActivity() {
     }
     private fun success(userDomainData: UserDomainData){
        if (userDomainData.status.equals("200")){
+
+            if (userDomainData.userList.size>0){
+                PreferenceManager.setObject("user_data",userDomainData)
+            }
             userAdapter = UserAdapter(userDomainData.userList)
             binding.ListData.layoutManager = LinearLayoutManager(this@MainActivity,LinearLayoutManager.VERTICAL,false)
             binding.ListData.adapter = userAdapter
@@ -153,6 +167,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun error(message:String){
+
+        val retrievedUser: UserDomainData? = PreferenceManager.getSharedPreferences().getObject("user_data")
+        if(retrievedUser!!.userList.isNotEmpty()){
+            userAdapter = UserAdapter(retrievedUser!!.userList)
+            binding.ListData.layoutManager = LinearLayoutManager(this@MainActivity,LinearLayoutManager.VERTICAL,false)
+            binding.ListData.adapter = userAdapter
+            userAdapter.SetUpInteface(object:UserAdapter.ItemClick{
+                override fun DataClick(userDomain: UserDomain) {
+                    Toast.makeText(this@MainActivity ,userDomain.userName,Toast.LENGTH_LONG).show()
+                }
+
+            })
+
+        }
+
+
 
        Toast.makeText(this@MainActivity,message,Toast.LENGTH_LONG).show()
         val fn=::isPalindrome
