@@ -46,38 +46,47 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+        //-- 1) Generic Class
+        //a generic class allows you to define a class that can work with different data types while maintaining type safety.
+        val intBox = Box(10) // Box holding an Int
+        val stringBox = Box("Hello") // Box holding a String
+        Log.e("##","" + intBox.getItem())
+        // Output: 10
+        Log.e("##", stringBox.getItem())
+        // Output: Hello
 
-        //-- Extension function for String
+
+        //-- 2) Extension function for String
         //allow you to add new functionality to existing classes without modifying their original implementation.
         val message = "hello, kotlin!"
         println(message.capitalizeFirstLetter())
         // Output: "Hello, kotlin!"
 
-        //--- TOP LEVEL Function
+        //--- 3) TOP LEVEL Function
         // use function without create instances of the class  in same module
         showData("Dada")
-        //-- Singleton Class
+        //-- 4) Singleton Class
         // has only one instance throughout the app and no need for manual instance creation
         SingletonClass.showData()
-        //-- Enum Demo
+        //-- 5) Enum Demo
         //fix value
         Status.SUCCESS.printMessage()
-        //----Sealed Class Demo
+        //----6) Sealed Class Demo
         //Type Fix but value can change for controlled hierarchy
         userViewModel.userList.observe(this){state->
             when(state){
-                //-------is Operator – Type Checking
+                //-------7) is Operator – Type Checking
                 ApiResultState.Loading ->loading()
                 is ApiResultState.Success ->success(state.data)
                 is ApiResultState.APIErrorMessage -> error(state.message)
                 is ApiResultState.ServerErrorMessage -> error(state.errorMessage)
             }
         }
-        //---as Safe Type Casting
+        //---8) as Safe Type Casting
         safeCastExample("Hello")  // Output: 5
         safeCastExample(123)      // Output: Not a String
 
-        //--- Higher-Order Function
+        //--- 9) Higher-Order Function
         //---Takes another function as a parameter, or Returns a function as a result.
         val sumResult = operateOnNumbers(5, 3) { x, y -> x + y }
         Log.e("##","" + sumResult)
@@ -102,7 +111,7 @@ class MainActivity : AppCompatActivity() {
         // Output: 15
 
 
-        // Palette API
+        // 10) Palette API (Check PaletteActivity)
         // is used to extract prominent colors from images to create dynamic and
         // visually engaging UI designs. It helps developers generate color schemes
         // from images and apply them to UI elements like backgrounds, text, and buttons.
@@ -157,6 +166,16 @@ class MainActivity : AppCompatActivity() {
             return true
         }else{
             return false
+        }
+    }
+
+    class Box<T>(private var item: T) {
+        fun getItem(): T {
+            return item
+        }
+
+        fun setItem(newItem: T) {
+            item = newItem
         }
     }
 
