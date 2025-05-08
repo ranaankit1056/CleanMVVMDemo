@@ -8,10 +8,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.test.R
 import com.example.test.common.ApiResultState
 import com.example.test.databinding.ActivityMainBinding
 import com.example.test.user.domain.model.UserDomain
@@ -97,10 +94,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun error(message:String){
         Toast.makeText(this@MainActivity,message,Toast.LENGTH_LONG).show()
-
-
         val fn=::isPalindrome
-
         Log.e("##","fd" + check(isPalindrome("dsds")));
 
     }
@@ -114,8 +108,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun check(abc:(input:String)->Boolean){
-        Log.e("sdsd","Fdfd")
-
-    }
 }
