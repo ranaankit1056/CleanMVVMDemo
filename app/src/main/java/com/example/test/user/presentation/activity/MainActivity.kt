@@ -34,15 +34,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        showData("Dada")
-        SingletonClass.showData()
 
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
         binding.EtvSearch.addTextChangedListener(object:TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
@@ -57,17 +49,30 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
-
-
+        //--- TOP LEVEL Function
+        showData("Dada")
+        //-- Singleton Class
+        SingletonClass.showData()
+        //-- Enum Demo
+        Status.SUCCESS.printMessage()
+        //----Sealed Class Demo
         userViewModel.userList.observe(this){state->
-
             when(state){
+                //-------is Operator – Type Checking
                 ApiResultState.Loading ->loading()
                 is ApiResultState.Success ->success(state.data)
                 is ApiResultState.APIErrorMessage -> error(state.message)
                 is ApiResultState.ServerErrorMessage -> error(state.errorMessage)
             }
         }
+        //---as Safe Type Casting
+        safeCastExample("Hello")  // Output: 5
+        safeCastExample(123)      // Output: Not a String
+    }
+
+    private fun safeCastExample(value: Any) {
+        val str: String? = value as? String
+        println(str?.length ?: "Not a String")
     }
 
     private fun loading(){
