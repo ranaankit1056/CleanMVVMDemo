@@ -5,15 +5,15 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
+        app:cardCornerRadius="20dp"
         app:cardUseCompatPadding="true"
-        android:elevation="20dp"
+        android:elevation="40dp"
         android:layout_margin="5dp">
         <LinearLayout
             android:id="@+id/main"
             android:layout_margin="5dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             tools:context=".user.presentation.activity.AddUserActivity">
 

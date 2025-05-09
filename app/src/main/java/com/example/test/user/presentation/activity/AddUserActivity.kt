@@ -19,8 +19,6 @@ class AddUserActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding =ActivityAddUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
         viewmodel.addUser.observe(this){state->
             when(state){
                         ApiResultState.Loading -> loading()
@@ -30,7 +28,6 @@ class AddUserActivity : AppCompatActivity() {
             }
 
         }
-
 
         binding.btnSubmit.setOnClickListener {
             val name = binding.etvName.text.toString().trim()
