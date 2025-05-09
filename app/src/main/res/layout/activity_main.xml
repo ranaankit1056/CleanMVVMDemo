@@ -3,10 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
+        android:layout_margin="5dp"
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".user.presentation.activity.MainActivity">
@@ -22,4 +27,15 @@
             android:layout_height="match_parent" />
 
     </LinearLayout>
+<com.google.android.material.floatingactionbutton.FloatingActionButton
+    android:id="@+id/fabAdd"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentEnd="true"
+    android:importantForAccessibility="yes"
+    android:src="@drawable/ic_launcher_foreground"
+    android:layout_marginEnd="10dp"
+    android:layout_marginBottom="10dp"/>
+</RelativeLayout>
 </layout>

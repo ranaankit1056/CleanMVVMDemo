@@ -1,11 +1,15 @@
 package com.example.test.user.presentation.activity
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     private val userViewModel:UserViewModel by viewModels()
     private lateinit var userAdapter:UserAdapter
     private lateinit var binding:ActivityMainBinding
+    private lateinit var resultLauncher:ActivityResultLauncher<Intent>
 
 
 
@@ -51,10 +56,28 @@ class MainActivity : AppCompatActivity() {
 
         })
 
+        resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result->
+            if (result.resultCode == Activity.RESULT_OK){
+
+               val resultData = result.data?.getBooleanExtra("isRefresh",false)
+                Toast.makeText(this@MainActivity, "Return $resultData",Toast.LENGTH_LONG).show()
+                if(resultData== true){
+                    userViewModel.loadData()
+                }
+            }
+        }
+
+
         //-- PreferenceManager
 
         PreferenceManager.setKeyValueString("user_id","202")
         Log.e("##","" + PreferenceManager.getKeyValueString("user_id"))
+
+        binding.fabAdd.setOnClickListener{
+            val intent = Intent(this@MainActivity, AddUserActivity::class.java)
+            resultLauncher.launch(intent)
+            startActivity(intent)
+        }
 
         //-- 1) Generic Class
         //a generic class allows you to define a class that can work with different data types while maintaining type safety.

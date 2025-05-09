@@ -10,12 +10,19 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.palette.graphics.Palette
+import androidx.work.PeriodicWorkRequest
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
 import com.example.test.R
 import com.example.test.databinding.ActivityPaletteBinding
+import com.example.test.user.presentation.service.MyPeriodicWorker
+import java.util.concurrent.TimeUnit
 
 class PaletteActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPaletteBinding
+
+    lateinit var periodicWorkRequest:PeriodicWorkRequest
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +30,9 @@ class PaletteActivity : AppCompatActivity() {
         binding = ActivityPaletteBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
+
+        periodicWorkRequest = PeriodicWorkRequestBuilder<MyPeriodicWorker>(5 , TimeUnit.MINUTES).build()
+        WorkManager.getInstance(this@PaletteActivity).enqueue(periodicWorkRequest)
 
         val bitmap = (binding.imageView.drawable as BitmapDrawable).bitmap
         extractColorsAndApply(bitmap)

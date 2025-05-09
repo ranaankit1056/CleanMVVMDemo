@@ -95,5 +95,7 @@ dependencies {
 
     implementation("androidx.palette:palette-ktx:1.0.0")
 
+    implementation("androidx.work:work-runtime-ktx:2.8.1")
+
 
 }

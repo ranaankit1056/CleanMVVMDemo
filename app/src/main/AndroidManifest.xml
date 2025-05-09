@@ -17,14 +17,16 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".user.presentation.activity.AddUserActivity"
+            android:exported="false" />
+        <activity
             android:name=".user.presentation.activity.PaletteActivity"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
-
-        </activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
         <activity
             android:name=".user.presentation.activity.MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.Test">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
