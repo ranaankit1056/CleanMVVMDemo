@@ -76,7 +76,6 @@ class MainActivity : AppCompatActivity() {
         binding.fabAdd.setOnClickListener{
             val intent = Intent(this@MainActivity, AddUserActivity::class.java)
             resultLauncher.launch(intent)
-            startActivity(intent)
         }
 
         //-- 1) Generic Class
