@@ -8,9 +8,6 @@ import android.widget.GridLayout
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.test.R
 import com.example.test.databinding.ActivityMatrixBinding
 
 class MatrixActivity : AppCompatActivity() {
@@ -23,6 +20,8 @@ class MatrixActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(binding.root)
         val inputSize = 5 // Example user input
+
+
         val matrix = generateColorMatrix(inputSize)
         val pairCount = countColorPairs(matrix)
         displayMatrix(binding.gridLayout, matrix)
@@ -31,11 +30,11 @@ class MatrixActivity : AppCompatActivity() {
 
     }
 
-    fun generateColorMatrix(size: Int): Array<Array<Int>> {
+    private fun generateColorMatrix(size: Int): Array<Array<Int>> {
         val colors = listOf(Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW, Color.CYAN)
         return Array(size) { Array(size) { colors.random() } }
     }
-    fun countColorPairs(matrix: Array<Array<Int>>): Int {
+    private fun countColorPairs(matrix: Array<Array<Int>>): Int {
         var count = 0
         val visited = mutableSetOf<Pair<Int, Int>>()
 
@@ -60,7 +59,7 @@ class MatrixActivity : AppCompatActivity() {
         }
         return count
     }
-    fun displayMatrix(gridLayout: GridLayout, matrix: Array<Array<Int>>) {
+    private fun displayMatrix(gridLayout: GridLayout, matrix: Array<Array<Int>>) {
         gridLayout.removeAllViews()
         gridLayout.columnCount = matrix.size
         gridLayout.rowCount = matrix.size

@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.kapt)
     alias(libs.plugins.com.google.devtools.ksp)
     alias(libs.plugins.com.google.dagger.hilt.android)
+    id("com.google.gms.google-services")
+
 }
 
 android {
@@ -18,7 +20,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField("String","BASE_URL","\"http://192.168.1.102/AndroidAPI/\"")
+        buildConfigField("String","BASE_URL","\"http://192.168.1.102`/AndroidAPI/`\"")
     }
 
     buildTypes {
@@ -96,6 +98,11 @@ dependencies {
     implementation("androidx.palette:palette-ktx:1.0.0")
 
     implementation("androidx.work:work-runtime-ktx:2.8.1")
+
+    //--- Firebase
+    implementation(platform("com.google.firebase:firebase-bom:33.14.0"))
+    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-database-ktx")
 
 
 }

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "613067035135",
+    "project_id": "proud-lamp-461708-a2",
+    "storage_bucket": "proud-lamp-461708-a2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:613067035135:android:0f3747d849375e1d6017ca",
+        "android_client_info": {
+          "package_name": "com.example.test"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwz9s72woUYzok8Mcx2qPKdg2pVMIMngo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
