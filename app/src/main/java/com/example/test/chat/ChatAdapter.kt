@@ -43,7 +43,7 @@ class ChatAdapter(private var messages: List<ChatMessage>) :
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val message = messages[position]
 
-        val dateFormat = SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault())
+        val dateFormat = SimpleDateFormat("dd-MM-yyyy hh:mm:ss a", Locale.getDefault())
         val date = Date(message.timestamp)
 
         if (holder is MyViewHolder) {
