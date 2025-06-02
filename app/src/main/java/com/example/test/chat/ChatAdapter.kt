@@ -11,7 +11,7 @@ import java.util.Date
 import java.util.Locale
 
 
-class ChatAdapter(private val messages: List<ChatMessage>) :
+class ChatAdapter(private var messages: List<ChatMessage>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -46,16 +46,15 @@ class ChatAdapter(private val messages: List<ChatMessage>) :
         val date = Date(message.timestamp)
 
         if (holder is MyViewHolder) {
-            val view: MyViewHolder? = holder as MyViewHolder?
+            holder as MyViewHolder?
             holder.senderText.text = message.senderId
             holder.messageText.text = message.text
             holder.timeText.text =dateFormat.format(date)
         }else if (holder is OtherViewHolder){
-            val view: OtherViewHolder? = holder as OtherViewHolder?
+            holder as OtherViewHolder?
             holder.senderText.text = message.senderId
             holder.messageText.text = message.text
             holder.timeText.text = dateFormat.format(date)
-
         }
 
     }
@@ -63,11 +62,12 @@ class ChatAdapter(private val messages: List<ChatMessage>) :
     override fun getItemCount(): Int = messages.size
 
     override fun getItemViewType(position: Int): Int {
+        val viewType = if (messages[position].senderId == "user1") 0 else 1
+        return viewType
+    }
 
-        if (messages.get(position).senderId.toString().equals("user1")){
-            return 0;
-        }else{
-            return 1;
-        }
+    fun updateMessages(newMessages: List<ChatMessage>) {
+        messages = newMessages
+        notifyDataSetChanged() // Refresh RecyclerView
     }
 }

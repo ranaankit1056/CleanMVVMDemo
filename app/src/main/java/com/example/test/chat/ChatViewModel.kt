@@ -31,4 +31,10 @@ class ChatViewModel : ViewModel() {
             }
         })
     }
+
+    fun sendMessage(senderId: String, text: String) {
+        val messageId = dbRef.push().key ?: return
+        val message = ChatMessage(id = messageId, senderId = senderId, text = text)
+        dbRef.child(messageId).setValue(message)
+    }
 }
