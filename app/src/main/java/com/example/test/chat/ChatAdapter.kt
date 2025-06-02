@@ -1,5 +1,6 @@
 package com.example.test.chat
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -66,6 +67,7 @@ class ChatAdapter(private var messages: List<ChatMessage>) :
         return viewType
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateMessages(newMessages: List<ChatMessage>) {
         messages = newMessages
         notifyDataSetChanged() // Refresh RecyclerView
